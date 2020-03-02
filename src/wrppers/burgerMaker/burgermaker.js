@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Aux from 'react-aux';
 import Burger from '../../components/burger/burger';
 import BuildControls from '../../components/burger/buildControls/buildcontrols';
-
-
+import Reciept from '../../components/UI/Receipt/receipt';
+import Summary from '../../components/burger/Summary/summary';
 const INGREDIENT_PRICES = {
     salad: 0.5,
     cheese: 0.4,
@@ -21,7 +21,12 @@ class BurgerMaker extends Component {
             meat: 0
         },
         totalPrice: 8,
-        buyable: false
+        buyable: false,
+        buying: false
+    }
+
+    buyHandler = () => {
+        this.setState({buying : true})
     }
 
     newbuystate  (ingredients)  {
@@ -80,6 +85,9 @@ class BurgerMaker extends Component {
         }
         return (
             <Aux>
+            <Reciept show={this.state.buying}>
+                <Summary ingredients={this.state.ingredients}></Summary>
+            </Reciept>
               <Burger ingredients={this.state.ingredients}/>
                
               <BuildControls
@@ -88,6 +96,7 @@ class BurgerMaker extends Component {
               ingredientsMinus = {this.minusIngredientHandler}
               disabledprops = {disabledInfo}
               buyable = {this.state.buyable}
+              buying = {this.buyHandler}
               />
               
             </Aux>
