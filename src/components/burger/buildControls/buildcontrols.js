@@ -13,7 +13,10 @@ const buildcontrols = (props) => {
         <div className={clsses.buildControls}>
         {controls.map(ctrl => {
             return (
-            <BuildControl key={ctrl.label} label={ctrl.label} moreplus={() => props.ingredientsPlus(ctrl.type)} />
+            <BuildControl key={ctrl.label}
+             label={ctrl.label} 
+             moreplus={() => props.ingredientsPlus(ctrl.type)} 
+             lessminus={() => props.ingredientsMinus(ctrl.type)}/>
         )})}
             
         </div>
