@@ -25,6 +25,14 @@ class BurgerMaker extends Component {
         buying: false
     }
 
+    buycontinueHandler () {
+        alert('Continue')
+    }
+
+    buycancelHandler = () => {
+        this.setState({buying: false})
+    }
+
     buyHandler = () => {
         this.setState({buying : true})
     }
@@ -85,8 +93,12 @@ class BurgerMaker extends Component {
         }
         return (
             <Aux>
-            <Reciept show={this.state.buying}>
-                <Summary ingredients={this.state.ingredients}></Summary>
+            <Reciept recieptclosed={this.buycancelHandler} show={this.state.buying}>
+                <Summary 
+                price={this.state.totalPrice}
+                ingredients={this.state.ingredients}
+                buycancel={this.buycancelHandler}
+                buycontinue={this.buycontinueHandler}></Summary>
             </Reciept>
               <Burger ingredients={this.state.ingredients}/>
                
