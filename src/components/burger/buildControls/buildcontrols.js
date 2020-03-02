@@ -10,7 +10,9 @@ const controls = [
 ]
 const buildcontrols = (props) => {
     return (
+        
         <div className={clsses.buildControls}>
+        <p style={{textAlign: 'center', fontWeight: 'bold'}}>Current Price : <strong>{props.price.toFixed(1)}</strong></p>
         {controls.map(ctrl => {
             return (
             <BuildControl key={ctrl.label}
@@ -19,6 +21,9 @@ const buildcontrols = (props) => {
              lessminus={() => props.ingredientsMinus(ctrl.type)}
              disabledprops={props.disabledprops[ctrl.type]}/>
         )})}
+        <button className={clsses.Orderbutton}
+        disabled={!props.buyable}
+        >CHECKOUT</button>
             
         </div>
 

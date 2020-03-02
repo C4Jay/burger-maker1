@@ -6,7 +6,7 @@ import BuildControls from '../../components/burger/buildControls/buildcontrols';
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
-    cheease: 0.4,
+    cheese: 0.4,
     meat: 1.3,
     bacon: 0.7
 }
@@ -15,12 +15,25 @@ class BurgerMaker extends Component {
 
     state = {
         ingredients: {
-            salad: 1,
+            salad: 0,
             cheese: 0,
-            bacon: 1,
+            bacon: 0,
             meat: 0
         },
-        totalPrice: 8
+        totalPrice: 8,
+        buyable: false
+    }
+
+    newbuystate  (ingredients)  {
+      
+        const sum = Object.keys(ingredients) //array
+        .map(igKey => {
+            return ingredients[igKey];
+        })
+        .reduce((sum, el) => {
+            return sum + el
+        },0);
+        this.setState({buyable: sum > 0});
     }
 
     plusIngredientHandler = (type) => {
@@ -35,6 +48,7 @@ class BurgerMaker extends Component {
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice + pricePlus;
         this.setState({totalPrice : newPrice, ingredients: updatedIngredients});
+        this.newbuystate(updatedIngredients);
 
 
     }
@@ -52,6 +66,7 @@ class BurgerMaker extends Component {
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice - pricePluse;
         this.setState({ingredients: updatedIngredients, totalPrice: newPrice});
+        this.newbuystate(updatedIngredients)
 
 
     }
@@ -66,11 +81,15 @@ class BurgerMaker extends Component {
         return (
             <Aux>
               <Burger ingredients={this.state.ingredients}/>
-              <BuildControls 
+               
+              <BuildControls
+              price={this.state.totalPrice} 
               ingredientsPlus = {this.plusIngredientHandler}
               ingredientsMinus = {this.minusIngredientHandler}
-              disabledprops = {disabledInfo}/>
-              />   
+              disabledprops = {disabledInfo}
+              buyable = {this.state.buyable}
+              />
+              
             </Aux>
             
         )
