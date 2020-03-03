@@ -14,3 +14,11 @@ Mar 02, 2020 12:04:43 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint noti
 INFO: Unsupported notification method: $/setTraceNotification
 INFO  time: initialize in 3.67s
 WARN  no build tool detected in workspace 'c:\Users\Chulaka\R\burger-maker1'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+INFO  time: initialize in 1.79s
+WARN  no build tool detected in workspace 'c:\Users\Chulaka\R\burger-maker1'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+Mar 03, 2020 9:25:44 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTraceNotification
+Mar 03, 2020 9:25:45 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTraceNotification
+Mar 03, 2020 9:25:45 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTraceNotification

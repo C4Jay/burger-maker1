@@ -1,13 +1,18 @@
 import React from 'react';
 import clsses from './appbar.css'
+import Logo from '../../logo/logo';
+import NavItems from '../navitems/navitems';
+import NavItem from '../navitems/navitem/navitem';
 
 const appbar = (props) => (
+
     <header className={clsses.appbar}>
-        <div>Menu</div>
-        <div>logo</div>
-        <div><nav>
-            <ul></ul>
-            </nav></div>
+    <NavItem impress clicked={props.clicked} style={{cursor: 'pointer'}}>Menu</NavItem>
+
+    <Logo height="80%"></Logo>
+        <nav>
+            <NavItems></NavItems>
+            </nav>
     </header>
 
 )

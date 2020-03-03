@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: coral;
+    background: linear-gradient(to right, #ff5f6d, #ffc371);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,5 +16,13 @@
 
 .appbar nav {
     height: 100%;
-    
+
+}
+
+
+
+@media (max-width: 499px){
+    .appbar nav {
+        display: none;
+    }
 }
