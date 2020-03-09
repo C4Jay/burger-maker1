@@ -4,6 +4,7 @@ import Burger from '../../components/burger/burger';
 import BuildControls from '../../components/burger/buildControls/buildcontrols';
 import Reciept from '../../components/UI/Receipt/receipt';
 import Summary from '../../components/burger/Summary/summary';
+import axios from '../../axios-orders'
 const INGREDIENT_PRICES = {
     salad: 0.5,
     cheese: 0.4,
@@ -25,8 +26,34 @@ class BurgerMaker extends Component {
         buying: false
     }
 
-    buycontinueHandler () {
-        alert('Continue')
+    buycontinueHandler = () => {
+        /* alert('Continue') */
+        const createdburger = {
+           ingredients: this.state.ingredients,
+            price: this.state.totalPrice,
+            customer: {
+                name: 'Max Imus',
+                address: {
+                    strt: 'Jersey Strt',
+                    Zip: '689',
+                    country: 'Denmark'
+                },
+                mail: 'maximus@abc.com'
+            },
+            delivery: 'cheapest'
+            }
+        
+        axios.post('/orders.json', createdburger)
+        .then(response => {
+            console.log(response)
+        }).catch(err => {
+            console.log(err)
+        })
+        
+    
+
+
+
     }
 
     buycancelHandler = () => {
