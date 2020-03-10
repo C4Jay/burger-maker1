@@ -5,6 +5,7 @@ import BuildControls from '../../components/burger/buildControls/buildcontrols';
 import Reciept from '../../components/UI/Receipt/receipt';
 import Summary from '../../components/burger/Summary/summary';
 import axios from '../../axios-orders'
+import Spinner from '../../components/UI/Spinner/spinner';
 const INGREDIENT_PRICES = {
     salad: 0.5,
     cheese: 0.4,
@@ -20,14 +21,24 @@ class BurgerMaker extends Component {
             cheese: 0,
             bacon: 0,
             meat: 0
-        },
+        }, 
         totalPrice: 8,
         buyable: false,
-        buying: false
+        buying: false,
+        sending: false
     }
 
+   /*  componentDidMount() {
+        axios.get('https://create-burger-5b470.firebaseio.com/ingredients.json')
+        .then(response => {
+            this.setState({ingredients: response})
+        })
+    }
+ */
     buycontinueHandler = () => {
         /* alert('Continue') */
+        this.setState({sending: true})
+
         const createdburger = {
            ingredients: this.state.ingredients,
             price: this.state.totalPrice,
@@ -46,14 +57,13 @@ class BurgerMaker extends Component {
         axios.post('/orders.json', createdburger)
         .then(response => {
             console.log(response)
+            this.setState({sending: false, buying: false})
+
         }).catch(err => {
             console.log(err)
+            this.setState({sending: false, buying: false})
+
         })
-        
-    
-
-
-
     }
 
     buycancelHandler = () => {
@@ -118,16 +128,24 @@ class BurgerMaker extends Component {
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
+
+        
         return (
             <Aux>
+                
+                {this.state.sending ? <Spinner/> :
+
             <Reciept recieptclosed={this.buycancelHandler} show={this.state.buying}>
-                <Summary 
+                {<Summary 
                 price={this.state.totalPrice}
                 ingredients={this.state.ingredients}
                 buycancel={this.buycancelHandler}
-                buycontinue={this.buycontinueHandler}></Summary>
+                buycontinue={this.buycontinueHandler}></Summary>}
             </Reciept>
-              <Burger ingredients={this.state.ingredients}/>
+        }
+
+        
+             <Burger ingredients={this.state.ingredients}/>
                
               <BuildControls
               price={this.state.totalPrice} 
@@ -136,7 +154,7 @@ class BurgerMaker extends Component {
               disabledprops = {disabledInfo}
               buyable = {this.state.buyable}
               buying = {this.buyHandler}
-              />
+              /> 
               
             </Aux>
             
