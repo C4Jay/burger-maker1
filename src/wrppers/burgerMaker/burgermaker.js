@@ -58,6 +58,7 @@ class BurgerMaker extends Component {
         .then(response => {
             console.log(response)
             this.setState({sending: false, buying: false})
+            this.props.history.push('/checkout')
 
         }).catch(err => {
             console.log(err)
