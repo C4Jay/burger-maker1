@@ -37,7 +37,7 @@ class BurgerMaker extends Component {
  */
     buycontinueHandler = () => {
         /* alert('Continue') */
-        this.setState({sending: true})
+       /*  this.setState({sending: true})
 
         const createdburger = {
            ingredients: this.state.ingredients,
@@ -63,6 +63,17 @@ class BurgerMaker extends Component {
         }).catch(err => {
             console.log(err)
             this.setState({sending: false, buying: false})
+
+        }) */
+
+        const queryParams = [];
+        for(let i in this.state.ingredients){
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+        }
+        const queryString = queryParams.join('&')
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
 
         })
     }
